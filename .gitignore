@@ -45,11 +45,9 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
-# Note: *.db files are tracked with Git LFS (see .gitattributes)
-# They are excluded here but will be force-added with LFS
-*.db
-*.sqlite
-*.sqlite3
+# Note: *.db, *.sqlite, *.sqlite3 files are tracked with Git LFS (see .gitattributes)
+# We don't ignore them here so Git LFS can manage them
+# OS-specific .db files (Thumbs.db, ehthumbs.db) are already ignored in OS section above
 
 raw_data/
 cleaned_data/
