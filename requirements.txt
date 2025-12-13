@@ -1,0 +1,7 @@
+scrapy
+scrapy-playwright
+playwright
+requests
+beautifulsoup4
+lxml
+pyyaml

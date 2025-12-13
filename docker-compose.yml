@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  islamqa-scraper:
+    build: .
+    container_name: islamqa-scraper
+    volumes:
+      - ./training_data:/app/training_data
+      - ./islamqa_fast.db:/app/islamqa_fast.db
+      - ./islamqa_simple.db:/app/islamqa_simple.db
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python fast_scraper.py
+    restart: unless-stopped
+    
+  simple-scraper:
+    build: .
+    container_name: islamqa-simple
+    volumes:
+      - ./training_data:/app/training_data
+      - ./islamqa_simple.db:/app/islamqa_simple.db
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python SIMPLE_SCRAPER.py
+    restart: unless-stopped
