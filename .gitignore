@@ -45,9 +45,12 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
+# Note: *.db files are tracked with Git LFS (see .gitattributes)
+# They are excluded here but will be force-added with LFS
 *.db
 *.sqlite
 *.sqlite3
+
 raw_data/
 cleaned_data/
 training_data/
@@ -58,7 +61,6 @@ training_data/
 # Allow scrape data to be tracked
 !continuous_training_data/
 !training_data/
-!*.db
 
 # Temporary files
 temp/
