@@ -58,7 +58,7 @@ training_data/
 
 # Allow scrape data to be tracked
 !continuous_training_data/
-!training_data/
+pipelines/vedkabhed/browser_session/
 
 # Temporary files
 temp/

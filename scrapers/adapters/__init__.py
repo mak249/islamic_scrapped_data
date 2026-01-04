@@ -1,4 +1,0 @@
-"""
-Site-specific scraper adapters.
-"""
-
