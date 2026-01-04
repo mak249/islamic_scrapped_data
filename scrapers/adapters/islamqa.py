@@ -448,15 +448,8 @@ class IslamQAAdapter(BaseScraper):
         if resume_state and resume_state.get('last_id'):
             return resume_state['last_id']
         
-        # Try to extract from URLs
-        contents = storage.query_content(source='islamqa', limit=1000)
-        max_id = 0
-        for content in contents:
-            url = content.get('url', '')
-            match = re.search(r'/answers/(\d+)', url)
-            if match:
-                max_id = max(max_id, int(match.group(1)))
-        return max_id
+        # Use efficient max query instead of limited record scan
+        return storage.get_max_question_id('islamqa')
     
     @staticmethod
     def estimate_remaining(storage: UnifiedStorage, max_id: int) -> int:

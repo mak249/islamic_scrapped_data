@@ -11,7 +11,7 @@ sites:
     content_type: "q&a"
     
   sunnah:
-    enabled: true
+    enabled: false  # Disabled per user request
     base_url: "https://sunnah.com"
     start_urls:
       - "https://sunnah.com/bukhari"

@@ -373,4 +373,29 @@ class UnifiedStorage:
             'by_content_type': by_type,
             'by_language': by_language
         }
+    
+    def get_max_question_id(self, source: str) -> int:
+        """
+        Get maximum question ID for a source by extracting from URLs.
+        
+        Args:
+            source: Source name (e.g., 'islamqa')
+            
+        Returns:
+            Maximum ID found or 0 if none
+        """
+        import re
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT url FROM content WHERE source = ?', (source,))
+        
+        max_id = 0
+        for (url,) in cursor.fetchall():
+            match = re.search(r'/answers/(\d+)', url)
+            if match:
+                max_id = max(max_id, int(match.group(1)))
+        
+        conn.close()
+        return max_id
 
