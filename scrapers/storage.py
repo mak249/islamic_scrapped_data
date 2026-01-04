@@ -377,6 +377,7 @@ class UnifiedStorage:
     def get_max_question_id(self, source: str) -> int:
         """
         Get maximum question ID for a source by extracting from URLs.
+        Supports both unified storage (content table) and fast_scraper format (qa_pairs).
         
         Args:
             source: Source name (e.g., 'islamqa')
@@ -388,13 +389,27 @@ class UnifiedStorage:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        cursor.execute('SELECT url FROM content WHERE source = ?', (source,))
-        
         max_id = 0
-        for (url,) in cursor.fetchall():
-            match = re.search(r'/answers/(\d+)', url)
-            if match:
-                max_id = max(max_id, int(match.group(1)))
+        
+        # Check content table (unified storage)
+        try:
+            cursor.execute('SELECT url FROM content WHERE source = ?', (source,))
+            for (url,) in cursor.fetchall():
+                match = re.search(r'/answers/(\d+)', url)
+                if match:
+                    max_id = max(max_id, int(match.group(1)))
+        except Exception:
+            pass  # Table doesn't exist
+        
+        # Check qa_pairs table (fast_scraper format)
+        try:
+            cursor.execute('SELECT url FROM qa_pairs')
+            for (url,) in cursor.fetchall():
+                match = re.search(r'/answers/(\d+)', url)
+                if match:
+                    max_id = max(max_id, int(match.group(1)))
+        except Exception:
+            pass  # Table doesn't exist
         
         conn.close()
         return max_id
