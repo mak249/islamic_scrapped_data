@@ -27,21 +27,19 @@ web scraping/
 ```powershell
 # Scrape
 python pipelines/islamqa/scraper.py auto +10000
-
-# Clean & Export
-python pipelines/islamqa/processor.py --all
 ```
-
-### 2. Vedkabhed Pipeline
-```powershell
-# Scrape (Auto monitors speed/resources)
-python pipelines/vedkabhed/scraper.py
-```
-
-### 3. Check Stats
+**Check Stats:**
 ```powershell
 python pipelines/islamqa/stats.py
 ```
+**Database:** `pipelines/islamqa/data.db`
+
+### 2. Vedkabhed Pipeline
+**Run Scraper:**
+```powershell
+python pipelines/vedkabhed/scraper.py
+```
+**Database:** `pipelines/vedkabhed/data.db`
 
 ## 📊 Output Locations
 - **IslamQA**: `pipelines/islamqa/output/`

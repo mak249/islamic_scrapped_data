@@ -352,7 +352,7 @@ def main():
         print("  python max_throughput.py auto +10000")
         return
 
-    db_path = "data.db"
+    db_path = os.path.join(os.path.dirname(__file__), "data.db")
     
     # Handle Start ID
     if sys.argv[1].lower() == 'auto':
